@@ -1,0 +1,17 @@
+<div class="card search">
+    <h1 class="search-headline">Artist Directory</h1>
+    <label class="search-label">search
+        <span *ngIf="name" bind-innerHTML="' for : ' + name"></span><!-- bind- is an alternate form of [] -->
+    </label>
+    <input class="search-input" #newArtist 
+    [(ngModel)]="name" 
+    (keyup.enter)="addArtist(newArtist.value); newArtist.value='' ">
+    <button class="btn" (click)="addArtist(newArtist.value); newArtist.value = '' ">Add</button>
+</div><!--card search-->
+
+<ul class="artistlist cf">
+    <li class="artistlist-item cf" *ngFor="let item of artists" #artistContainer (click)="onClick(item, artistContainer)">
+         <h2 class="artist-name">{{ item.name }}</h2>
+         <h3 class="artist-reknown">{{ item.school }}</h3>
+    </li>
+</ul>

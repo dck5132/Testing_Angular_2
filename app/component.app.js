@@ -20,11 +20,39 @@ System.register(['@angular/core'], function(exports_1, context_1) {
         execute: function() {
             AppComponent = (function () {
                 function AppComponent() {
+                    this.name = "Xhou Ta";
+                    this.artists = [
+                        {
+                            name: "Barot Bellingham",
+                            school: "Penn State"
+                        },
+                        {
+                            name: "Hillary Post",
+                            school: "University of Illinois"
+                        },
+                        {
+                            name: "Jonathan Ferrar",
+                            school: "University of Florida"
+                        }
+                    ];
                 }
+                AppComponent.prototype.addArtist = function (value) {
+                    if (value != '') {
+                        this.artists.push({
+                            name: value,
+                            school: "Hard Knocks"
+                        });
+                    }
+                };
+                AppComponent.prototype.onClick = function (myItem, myElement) {
+                    this.name = myItem.name;
+                    myElement.style.backgroundColor = "#FECE4E";
+                };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'app',
-                        template: '<h1>Artist Directory</h1>'
+                        templateUrl: './partials/app.html',
+                        styleUrls: ["./css/app.css"]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);
