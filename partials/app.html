@@ -1,17 +1,23 @@
 <div class="card search">
     <h1 class="search-headline">Artist Directory</h1>
     <label class="search-label">search
-        <span *ngIf="name" bind-innerHTML="' for : ' + name"></span><!-- bind- is an alternate form of [] -->
+        <span *ngIf="query" bind-innerHTML="' for : ' + query"></span><!-- bind- is an alternate form of [] -->
     </label>
-    <input class="search-input" #newArtist 
-    [(ngModel)]="name" 
-    (keyup.enter)="addArtist(newArtist.value); newArtist.value='' ">
-    <button class="btn" (click)="addArtist(newArtist.value); newArtist.value = '' ">Add</button>
+    <input class="search-input"  [(ngModel)]="query" placeholder="Please enter the search term here">
 </div><!--card search-->
 
 <ul class="artistlist cf">
-    <li class="artistlist-item cf" *ngFor="let item of artists" #artistContainer (click)="onClick(item, artistContainer)">
-         <h2 class="artist-name">{{ item.name }}</h2>
-         <h3 class="artist-reknown">{{ item.school }}</h3>
-    </li>
+  <li class="artistlist-item cf" *ngFor="let item of artists">
+    <img class="artist-img" 
+      src="images/{{item.shortname}}_tn.jpg" alt="{{item.name}} photo">
+    <div class="artist-info">
+      <h2 class="artist-name">{{ item.name }}</h2>
+      <h3 class="artist-reknown">{{ item.reknown }}</h3>
+    </div>
+  </li>
 </ul>
+<!--<button class="btn" (click)="addArtist(newArtist.value); newArtist.value = '' ">Add</button>-->
+<!-- #newArtist: This is a temporary variable which is used by Angular2 to temporarily store values. These can be used to manipulate the UI.
+(keyup.enter)="addArtist(newArtist.value); newArtist.value=''": (keyup.enter) is Angular2 way of handling events - it takes the temporary value and runs a function with it as a parameter, followed by cleaning the temporary value so it can be reused.-->
+<!-- *ngFor let item of artists: Angular2 way of creating a for loop that creates a temporary variable called item for the artists array. -->
+<!-- {{ item.shortname }}: Angular2 way of using variables between the component and the actual HTML page. -->
