@@ -28,6 +28,9 @@ System.register(['@angular/core'], function(exports_1, context_1) {
                 function AppComponent() {
                     this.artists = ARTISTS;
                 }
+                AppComponent.prototype.showArtist = function (item) {
+                    this.currentArtist = item;
+                };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'app',

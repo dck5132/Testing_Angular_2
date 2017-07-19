@@ -3,14 +3,16 @@
     <label class="search-label">search
         <span *ngIf="query" bind-innerHTML="' for : ' + query"></span><!-- bind- is an alternate form of [] -->
     </label>
-    <input class="search-input"  [(ngModel)]="query" placeholder="Please enter the search term here">
+    <input class="search-input"  (keypress)="currentArtist=''" [(ngModel)]="query" placeholder="Please enter the search term here">
 </div><!--card search-->
 
-<ul class="artistlist cf">
-  <li class="artistlist-item cf" *ngFor="let item of artists">
+<ul class="artistlist cf" *ngIf="query">
+  <li class="artistlist-item cf" (click)='showArtist(item); query="";' *ngFor="let item of (artists | search : query)">
     <artist-item class="content" [artist]="item"></artist-item>
   </li>
 </ul>
+
+<artist-details *ngIf="currentArtist" [artist]="currentArtist"></artist-details>
 <!--<button class="btn" (click)="addArtist(newArtist.value); newArtist.value = '' ">Add</button>-->
 <!-- #newArtist: This is a temporary variable which is used by Angular2 to temporarily store values. These can be used to manipulate the UI.
 (keyup.enter)="addArtist(newArtist.value); newArtist.value=''": (keyup.enter) is Angular2 way of handling events - it takes the temporary value and runs a function with it as a parameter, followed by cleaning the temporary value so it can be reused.-->
